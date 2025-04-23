@@ -7,12 +7,16 @@ from PySide6.QtWidgets import (QMainWindow,
 
 
 class Calculator(QMainWindow):
-    def __init__(self):
+    def __init__(self, width: int, height: int):
         super().__init__()
-        left,top,width,height = 100,100,1000,800
+        self.width = width
+        self.height = height
+        #left,top,width,height = 100,100,1000,800
+        left,top = 100, 100
         #self.setGeometry(1600, 100, 230, 290)
         self.setGeometry(left,top,width,height)
-        self.setFixedSize(230, 290)
+        #self.setFixedSize(230, 290)
+        self.setFixedSize(width//4, height//4)
         self.setWindowOpacity(0.99)
 
         self.layout = QGridLayout()
