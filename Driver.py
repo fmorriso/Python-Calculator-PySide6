@@ -21,10 +21,10 @@ if __name__ == "__main__":
     print(f'PySide6-Addons version: {get_package_version("pyside6-addons")}')
     print(f'PyAutoGUI version: {get_package_version("pyautogui")}')
 
-    gui_settings = GuiSettings(0.65)
+    gui_settings = GuiSettings(0.25)
     print(f'GUI settings: {gui_settings}')
     app = QApplication(sys.argv)
 
-    window = Calculator(gui_settings.scaled_width, gui_settings.scaled_width)
+    window = Calculator(gui_settings)
     window.show()
     app.exec()

@@ -1,22 +1,34 @@
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QPoint, QSize, QRect
 from PySide6.QtWidgets import (QMainWindow,
                                QLineEdit,
                                QPushButton,
                                QGridLayout,
                                QWidget)
 
+from gui_settings import GuiSettings
+
 
 class Calculator(QMainWindow):
-    def __init__(self, width: int, height: int):
+    def __init__(self, gui_settings: GuiSettings):
         super().__init__()
-        self.width = width
-        self.height = height
+        self.width = gui_settings.scaled_width
+        self.height = gui_settings.scaled_height
+        self.center_of_device = gui_settings.center_of_device
+        print(f'center_of_device: {self.center_of_device}')
         #left,top,width,height = 100,100,1000,800
         left,top = 100, 100
+        left = self.center_of_device[0] - self.width//2
+        top = self.center_of_device[1] - self.height//2
+        print(f'left: {left}, top: {top}')
         #self.setGeometry(1600, 100, 230, 290)
-        self.setGeometry(left,top,width,height)
+        # self.setGeometry( QPoint(x,y), QSize(w, h) )
+        top_left_corner = QPoint(left,top)
+        print(f'top_left_corner: {top_left_corner}')
+        calc_size = QSize(self.width,self.height)
+        calc_rect = QRect(top_left_corner, calc_size)
+        #self.setGeometry(calc_rect)
         #self.setFixedSize(230, 290)
-        self.setFixedSize(width//4, height//4)
+        self.setFixedSize(self.height, self.width)
         self.setWindowOpacity(0.99)
 
         self.layout = QGridLayout()
@@ -59,11 +71,12 @@ class Calculator(QMainWindow):
     def __get_btn_properties(self):
         return {
             "border": "1px solid rgba(0, 0, 0, 0.5)",
-            "color": "rgba(242, 163, 60, 1)",
-            "color_pressed": "rgb(212, 121, 31)",
-            "number_color": "rgb(96, 96, 96)",
+            "color": "white",
+            "background-color": "lightblue",
+            "color_pressed": "white",
+            "number_color": "white",
             "number_color_pressed": "rgb(157, 157, 157)",
-            "first_row_btn_color": "rgb(59, 59, 59)"
+            "first_row_btn_color": "pink"
         }
 
 
@@ -72,7 +85,7 @@ class Calculator(QMainWindow):
 
         style_last_col = f"""
                         QPushButton{{
-                            background-color: {prop['color']};
+                            background-color: {prop['background-color']};
                             border: {prop['border']};
                             margin: 0;
                             font-size: 30px;
@@ -231,14 +244,9 @@ class Calculator(QMainWindow):
                                    QLineEdit {
                                        font-size: 40px;
                                        padding: 0 10 0 0;
-                                       font-weight: 200;
-                                        background: qlineargradient(
-                                            x1: 0, y1: 0,
-                                            x2: 0, y2: 1,
-                                            stop: 0 rgb(58, 58, 62),
-                                            stop: 0.6 rgb(58, 59, 62),
-                                            stop: 1 rgb(52, 68, 80)
-                                        );
+                                       font-weight: bold;
+                                       background-color: black;
+                                       color: white;
                                    }
                                    """)
 

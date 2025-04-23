@@ -31,12 +31,19 @@ class GuiSettings:
         """Scaled width in pixels."""
         return self.__scaled_width
 
+    @property
+    def center_of_device(self) -> tuple:
+        """Center of device as an (x, y) tuple"""
+        return (self.device_width // 2, self.device_height // 2)
+
     def __str__(self) -> str:
         return (f'device width: {self.__device_width}, device height: {self.__device_height}'
                 f'\n\tscaled width: {self.__scaled_width}, '
-                f'scaled height{self.__scaled_height}')
+                f'scaled height: {self.__scaled_height}, '
+                f'Center of device: {self.center_of_device}')
 
     def __repr__(self) -> str:
         return (f'device width: {self.__device_width}, device height: {self.__device_height}'
                 f'\n\tscaled width: {self.__scaled_width}, '
-                f'scaled height{self.__scaled_height}')
+                f'scaled height: {self.__scaled_height}, '
+                f'center of device: {self.center_of_device}')
