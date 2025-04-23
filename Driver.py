@@ -1,0 +1,26 @@
+import sys
+from importlib.metadata import version
+
+from PySide6.QtWidgets import (QApplication)
+
+from calculator import Calculator
+
+
+def get_python_version() -> str:
+    return f'{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}'
+
+
+def get_package_version(package_name: str) -> str:
+    return version(package_name)
+
+
+if __name__ == "__main__":
+    print(f'Python version: {get_python_version()}')
+    print(f'PySide6 version: {get_package_version("pyside6")}')
+    print(f'PySide6-Addons version: {get_package_version("pyside6-addons")}')
+
+    app = QApplication(sys.argv)
+
+    window = Calculator()
+    window.show()
+    app.exec()

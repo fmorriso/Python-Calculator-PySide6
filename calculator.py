@@ -1,16 +1,17 @@
-from PySide6.QtWidgets import (QApplication,
-                               QMainWindow,
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (QMainWindow,
                                QLineEdit,
                                QPushButton,
                                QGridLayout,
                                QWidget)
-from PySide6.QtCore import Qt
 
 
 class Calculator(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setGeometry(1600, 100, 230, 290)
+        left,top,width,height = 100,100,1000,800
+        #self.setGeometry(1600, 100, 230, 290)
+        self.setGeometry(left,top,width,height)
         self.setFixedSize(230, 290)
         self.setWindowOpacity(0.99)
 
@@ -238,11 +239,3 @@ class Calculator(QMainWindow):
                                    """)
 
 
-if __name__ == "__main__":
-    import sys
-
-    app = QApplication(sys.argv)
-
-    window = Calculator()
-    window.show()
-    app.exec()
