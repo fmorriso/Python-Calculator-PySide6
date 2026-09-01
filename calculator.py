@@ -11,6 +11,8 @@ from gui_settings import GuiSettings
 class Calculator(QMainWindow):
     def __init__(self, gui_settings: GuiSettings):
         super().__init__()
+        self.display = None
+        self.last_operator = None
         self.width = gui_settings.scaled_width
         self.height = gui_settings.scaled_height
         self.center_of_device = gui_settings.center_of_device
@@ -68,7 +70,8 @@ class Calculator(QMainWindow):
         self.setup_push_buttons()
 
 
-    def __get_btn_properties(self):
+    @staticmethod
+    def __get_btn_properties():
         return {
             "border": "1px solid rgba(0, 0, 0, 0.5)",
             "color": "white",
@@ -158,9 +161,9 @@ class Calculator(QMainWindow):
 
 
     def on_btn_clicked(self):
-        '''
+        """
         Slot for all buttons
-        '''
+        """
         btn = self.sender()
         btn_text = btn.text()
 
@@ -180,14 +183,14 @@ class Calculator(QMainWindow):
 
 
     def clear(self):
-        '''Clear line edit'''
+        """Clear line edit"""
         self.display.clear()
 
 
     def change_sign(self):
-        '''
+        """
         Change the sign
-        '''
+        """
         self.display.setText(str(float(self.display.text()) * -1))
 
 
