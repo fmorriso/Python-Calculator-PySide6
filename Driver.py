@@ -17,9 +17,11 @@ def get_package_version(package_name: str) -> str:
 
 if __name__ == "__main__":
     print(f'Python version: {get_python_version()}')
+    print(f'Numpy version: {get_package_version("numpy")}')
     print(f'PySide6 version: {get_package_version("pyside6")}')
     print(f'PySide6-Addons version: {get_package_version("pyside6-addons")}')
     print(f'PyAutoGUI version: {get_package_version("pyautogui")}')
+    print(f'OpenCV-Python version: {get_package_version("opencv-python")}')
 
     gui_settings = GuiSettings(0.25)
     print(f'GUI settings: {gui_settings}')
